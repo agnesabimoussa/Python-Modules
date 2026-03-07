@@ -1,0 +1,47 @@
+Project: py03 — Data Quest
+
+This file documents the minimal changes made to ensure the project is ready for submission and aligned with the subject’s constraints.
+
+1) ex0/ft_command_quest.py
+   - Problem: Used range() to iterate over sys.argv, but Exercise 0 only authorizes sys, sys.argv, len(), print().
+   - Change: Replaced the for range(...) loop with a while loop using len() to iterate the arguments.
+   - Behavior: Unchanged output and logic.
+
+2) ex4/ft_inventory_system.py
+   - Problems:
+     - Used max()/min() and filtered for a non-existent 'weapon' type — could error and not in spirit of authorized dict APIs for this exercise.
+     - Shadowed built-in name 'sum'.
+     - Percentages always printed 0% due to placeholder value.
+   - Changes:
+     - Compute total quantity using a loop and rename accumulator to total_qty.
+     - Compute percentage share per item based on total_qty, stored in 'value'.
+     - Determine most/least abundant items via a single pass over inventory.items() without max()/min().
+     - Printed headings normalized to "=== Inventory Statistics ===".
+   - Behavior: Reports totals, unique items, per-item quantities with percentages, and most/least abundant items.
+
+3) ex5/ft_data_stream.py
+   - Problems:
+     - Used sum(...) on generator expressions to count events; Exercise 5 authorized functions exclude sum().
+     - Missing function type hints.
+     - Minor formatting: "Memory usage: Constant(streaming)" missing space.
+   - Changes:
+     - Replaced sum(...) counts with explicit loops counting items from generator functions.
+     - Added type hints for generator functions and imported typing.Iterator.
+     - Fixed spacing in memory usage line.
+   - Behavior: Same printed analytics, compliant with authorized functions.
+
+4) ex6/ft_analytics_dashboard.py
+   - Problem: Only headers existed; no actual comprehension demonstrations.
+   - Changes:
+     - Implemented list comprehensions (high scorers, doubled scores, active players).
+     - Implemented dict comprehensions (player->score mapping, score category mapping, category counts, achievement counts).
+     - Implemented set comprehensions (unique players from sessions, unique achievements, active modes from completed sessions).
+     - Added a small combined analysis (total players, total unique achievements, average score, top performer) using allowed built-ins.
+   - Behavior: Produces meaningful output illustrating comprehension mastery.
+
+5) Documentation
+   - Added README.md summarizing each exercise, how to run them, and what each demonstrates.
+
+Notes:
+- No other exercises required code changes; they already conformed to the authorized operations and expected behavior.
+- All edits are minimal and targeted to adhere to the subject’s constraints and improve stability/clarity.
