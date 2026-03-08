@@ -31,11 +31,13 @@ class NumericProcessor(DataProcessor):
         super().__init__()
 
     def validate(self, data: Any) -> bool:
-        if isinstance(data, list) and all(
-            isinstance(x, (int, float)) for x in data
-        ):
-            return True
-        return False
+        if data.__class__ is not list:
+            return False
+
+        for x in data:
+            if x.__class__ is not int and x.__class__ is not float:
+                return False
+        return True
 
     def process(self, data: Any) -> str:
         try:
