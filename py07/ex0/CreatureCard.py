@@ -13,46 +13,37 @@ class CreatureCard(Card):
                  attack: int,
                  health: int) -> None:
         super().__init__(name, cost, rarity)
+        if not isinstance(attack, int):
+            raise TypeError("attack must be an integer")
         if attack <= 0:
             raise ValueError("attack must be a positive integer")
         self.attack = attack
+        if not isinstance(health, int):
+            raise TypeError("health must be an integer")
         if health <= 0:
             raise ValueError("health must be a positive integer")
         self.health = health
-        self.type = CardType.CREATURE.value
+        self.type = CardType.CREATURE
 
     def play(self, game_state: dict) -> dict:
-        try:
-            res = {}
-            if game_state['mana'] >= self.cost:
-                res = {
-                    'card_played': self.name,
-                    'mana_used': self.cost,
-                    'effect': f'{self.type} summoned to battlefield'
-                }
-            return res
-        except KeyError:
-            print("KeyError: Make sure game_state dict has mana key")
+        return {
+            "card_played": self.name,
+            "mana_used": self.cost,
+            "effect": "Creature summoned to battlefield",
+        }
 
     def attack_target(self, target: dict) -> dict:
-        try:
-            res = {
-                'attacker': self.name,
-                'target': target['name'],
-                'damage_dealt': self.attack,
-            }
-            if target['health'] > self.attack:
-                res.update({'combat_resolved': False})
-            else:
-                res.update({'combat_resolved': True})
-            return res
-        except KeyError:
-            print("KeyError: Make sure target dict has name and health keys")
+        return {
+            "attacker": self.name,
+            "target": target,
+            "damage_dealt": self.attack,
+            "combat_resolved": True,
+        }
 
     def get_card_info(self) -> dict:
         return {"name": self.name,
                 "cost": self.cost,
                 "rarity": self.rarity,
-                "type": self.type,
+                "type": self.type.value,
                 "attack": self.attack,
                 "health": self.health}

@@ -11,7 +11,7 @@ if __name__ == "__main__":
     print(f"Playable: {creature_card.is_playable(6)}")
     print(creature_card.play({"mana": 6}))
     print(f"{creature_card.name} attacks Goblin Warrior:")
-    print(creature_card.attack_target({'name': "Goblin Warrior", "health": 4}))
+    print(creature_card.attack_target("Goblin Warrior"))
     print("Testing insufficient mana (3 available):")
     print(f"Playable: {creature_card.is_playable(3)}\n")
     print("Abstract pattern successfully demonstrated!")
