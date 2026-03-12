@@ -1,4 +1,4 @@
-from ex0.Card import Card
+from ex0.Card import Card, CardType
 
 
 class CreatureCard(Card):
@@ -19,20 +19,35 @@ class CreatureCard(Card):
         if health <= 0:
             raise ValueError("health must be a positive integer")
         self.health = health
-        self.type = "Creature"
+        self.type = CardType.CREATURE.value
 
     def play(self, game_state: dict) -> dict:
-        return {"card_played": self.name,
-                "mana_used": self.cost,
-                "effect": "Creature summoned to battlefield"}
+        try:
+            res = {}
+            if game_state['mana'] >= self.cost:
+                res = {
+                    'card_played': self.name,
+                    'mana_used': self.cost,
+                    'effect': f'{self.type} summoned to battlefield'
+                }
+            return res
+        except KeyError:
+            print("KeyError: Make sure game_state dict has mana key")
 
-    def attack_target(self, target) -> dict:
-        attack = self.attack
-        self.attack = 0
-        return {"attacker": self.name,
-                "target": target,
-                "damage_dealt": attack,
-                "combat_resolved": True}
+    def attack_target(self, target: dict) -> dict:
+        try:
+            res = {
+                'attacker': self.name,
+                'target': target['name'],
+                'damage_dealt': self.attack,
+            }
+            if target['health'] > self.attack:
+                res.update({'combat_resolved': False})
+            else:
+                res.update({'combat_resolved': True})
+            return res
+        except KeyError:
+            print("KeyError: Make sure target dict has name and health keys")
 
     def get_card_info(self) -> dict:
         return {"name": self.name,

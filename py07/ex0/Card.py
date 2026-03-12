@@ -1,4 +1,9 @@
 from abc import ABC, abstractmethod
+from enum import Enum
+
+
+class CardType(Enum):
+    CREATURE = "Creature"
 
 
 class Card(ABC):
