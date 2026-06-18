@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "python-module-08-ex1"
+version = "0.1.0"
+description = "This is a tutorial on pip and poetry."
+authors = ["aabi-mou <aabi-mou@student.42beirut.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+pandas = "2.2.0"
+requests = "2.31.0"
+matplotlib = "3.8.4"
+numpy = "1.26.4"
+pyarrow = "15.0.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
